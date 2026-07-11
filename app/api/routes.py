@@ -7,6 +7,7 @@ from app.core.logger import logger
 from app.schemas.response import VehicleResponse
 from app.schemas.vehicle import VehicleRequest
 from app.services.feature_engineering import engineer_features
+from app.services.health_scoring import calculate_health_score
 from app.services.llm_service import generate_health_report
 
 
@@ -50,10 +51,14 @@ def predict_vehicle_health(vehicle: VehicleRequest):
         # Engineer features
         features = engineer_features(vehicle)
 
-        # Generate AI assessment
+        # Calculate deterministic health assessment
+        assessment = calculate_health_score(features)
+
+        # Generate AI explanation
         health_report = generate_health_report(
             vehicle,
-            features
+            features,
+            assessment
         )
 
         # Combine backend metadata + AI output

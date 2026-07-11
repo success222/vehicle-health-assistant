@@ -1,15 +1,15 @@
-import socket
+# import socket
 
-# Force IPv4 for all outbound connections.
-# Prevents [Errno 101] Network is unreachable errors caused by
-# the Gemini SDK attempting IPv6 on networks/containers that don't support it.
-_original_getaddrinfo = socket.getaddrinfo
+# # Force IPv4 for all outbound connections.
+# # Prevents [Errno 101] Network is unreachable errors caused by
+# # the Gemini SDK attempting IPv6 on networks/containers that don't support it.
+# _original_getaddrinfo = socket.getaddrinfo
 
-def _ipv4_only_getaddrinfo(*args, **kwargs):
-    responses = _original_getaddrinfo(*args, **kwargs)
-    return [r for r in responses if r[0] == socket.AF_INET]
+# def _ipv4_only_getaddrinfo(*args, **kwargs):
+#     responses = _original_getaddrinfo(*args, **kwargs)
+#     return [r for r in responses if r[0] == socket.AF_INET]
 
-socket.getaddrinfo = _ipv4_only_getaddrinfo
+# socket.getaddrinfo = _ipv4_only_getaddrinfo
 
 from datetime import UTC, datetime
 

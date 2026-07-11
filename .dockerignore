@@ -38,10 +38,10 @@ htmlcov/
 .git/
 .gitignore
 
-# Docker
-Dockerfile
-.dockerignore
-EOF
+# # Docker
+# Dockerfile
+# .dockerignore
+# EOF
 
 logs/
 *.log

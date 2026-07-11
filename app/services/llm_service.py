@@ -3,6 +3,7 @@ from typing import Any
 
 from fastapi import HTTPException
 from google import genai
+import httpx
 from pydantic import ValidationError
 
 from app.core.config import settings
@@ -11,13 +12,15 @@ from app.prompts.health_prompt import build_prompt
 from app.schemas.response import AIHealthReport
 from app.schemas.vehicle import VehicleRequest
 
+from google.genai import types
+
 # Initialize Gemini client
 client = genai.Client(api_key=settings.GEMINI_API_KEY)
-
 
 def generate_health_report(
     vehicle: VehicleRequest,
     features: dict[str, Any],
+    assessment: dict[str, Any],
 ) -> AIHealthReport:
     """
     Generate a structured vehicle health assessment using Gemini.
@@ -28,10 +31,15 @@ def generate_health_report(
 
     Returns:
         AIHealthReport: Structured AI-generated assessment.
+    
     """
-
-    prompt = build_prompt(vehicle, features)
-
+    
+    prompt = build_prompt(
+    vehicle,
+    features,
+    assessment
+    )
+    
     try:
         logger.info(
             "Generating health report for %s %s",
@@ -40,11 +48,18 @@ def generate_health_report(
         )
         
         logger.info("Using Gemini model: %s", settings.GEMINI_MODEL)
+        
+        # logger.info("API key loaded: %s", settings.GEMINI_API_KEY[:10] + "...")
+        # logger.info("Model: %s", settings.GEMINI_MODEL)
+        logger.info("Prompt length: %d", len(prompt))
+        
         response = client.models.generate_content(
             model=settings.GEMINI_MODEL,
             contents=prompt,
+            #contents="Say hello."
         )
-
+        logger.info("Gemini raw response:\n%s", response.text)
+        
         response_text = response.text.strip()
 
         # Remove markdown code fences if present

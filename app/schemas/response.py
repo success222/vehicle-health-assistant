@@ -58,6 +58,11 @@ class AIHealthReport(BaseModel):
         le=100,
         description="Overall vehicle health score."
     )
+    
+    assessment_source: str = Field(
+        default="Python scoring engine + Gemini explanation",
+        description="Indicates how the assessment was generated."
+    )
 
     component_health: ComponentHealth
 
