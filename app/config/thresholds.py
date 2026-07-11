@@ -1,0 +1,17 @@
+"""
+Business rules and maintenance thresholds.
+
+These values can be updated as maintenance policies evolve.
+"""
+
+HIGH_MILEAGE_THRESHOLD = 120_000
+
+SERVICE_INTERVAL_MONTHS = 6
+
+OIL_CHANGE_INTERVAL_MONTHS = 6
+
+BRAKE_INSPECTION_INTERVAL_MONTHS = 24
+
+BATTERY_REPLACEMENT_INTERVAL_MONTHS = 36
+
+COOLANT_CHANGE_INTERVAL_MONTHS = 24
