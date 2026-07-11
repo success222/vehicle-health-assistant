@@ -19,3 +19,6 @@ env/
 
 logs/
 *.log
+
+test_api.py
+test_auth.py
