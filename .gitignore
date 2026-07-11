@@ -16,3 +16,6 @@ env/
 
 # macOS
 .DS_Store
+
+logs/
+*.log

@@ -1,0 +1,33 @@
+{
+  "request_id": "c9223142-28a1-494e-8acb-9bbf2cbd5552",
+  "generated_at": "2026-07-11T11:11:26.392736Z",
+  "confidence": "High",
+  "health_score": 85,
+  "component_health": {
+    "engine_oil": "Excellent",
+    "brake_pads": "Good",
+    "battery": "Good",
+    "coolant": "Excellent",
+    "transmission": "Good",
+    "tires": "Good"
+  },
+  "maintenance_recommendations": [
+    {
+      "component": "General Service",
+      "recommendation": "Schedule and perform the overdue general vehicle service.",
+      "priority": "Within 30 Days"
+    },
+    {
+      "component": "Tires",
+      "recommendation": "Conduct a routine tire inspection during the scheduled service to monitor tread wear and pressure.",
+      "priority": "Next Scheduled Service"
+    },
+    {
+      "component": "Transmission",
+      "recommendation": "Perform a routine check of the transmission system during the upcoming scheduled service.",
+      "priority": "Next Scheduled Service"
+    }
+  ],
+  "summary": "The vehicle is in overall good condition with relatively low mileage, and major individual components such as engine oil, brakes, battery, and coolant are currently not due for replacement. However, the general service indicator is overdue, which is why a routine service is recommended within 30 days. Routine inspections for the tires and transmission are suggested during this upcoming service to ensure continued vehicle reliability.",
+  "missing_information": null
+}

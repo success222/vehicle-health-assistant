@@ -1,6 +1,6 @@
 def build_prompt(vehicle, features):
     return f"""
-    You are an automotive predictive maintenance assistant for WhipCare.
+    You are an automotive predictive maintenance assistant.
 
     Your role is to assess vehicle health using backend-provided vehicle information
     and engineered facts.

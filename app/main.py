@@ -1,14 +1,25 @@
+import socket
+
+# Force IPv4 for all outbound connections.
+# Prevents [Errno 101] Network is unreachable errors caused by
+# the Gemini SDK attempting IPv6 on networks/containers that don't support it.
+_original_getaddrinfo = socket.getaddrinfo
+
+def _ipv4_only_getaddrinfo(*args, **kwargs):
+    responses = _original_getaddrinfo(*args, **kwargs)
+    return [r for r in responses if r[0] == socket.AF_INET]
+
+socket.getaddrinfo = _ipv4_only_getaddrinfo
+
 from datetime import UTC, datetime
 
 from fastapi import FastAPI
 
 from app.api.routes import router
-
 from app.core.middleware import log_request_time
 
 
 API_VERSION = "1.0.0"
-
 
 
 app = FastAPI(
@@ -20,7 +31,11 @@ app = FastAPI(
     version=API_VERSION,
 )
 
-app.add_middleware(log_request_time)
+
+@app.middleware("http")
+async def request_timer(request, call_next):
+    return await log_request_time(request, call_next)
+
 
 app.include_router(
     router,
